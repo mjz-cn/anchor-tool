@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+	<style>
+		#anchor_num {
+			color: red;
+			font-size: 20px;
+		}
+	</style>
+</head>
+<body class="container">
+	<div class="row">
+		<div class="col-md-9" style="background: url(images/tran.png);">
+			<canvas id="canvas" style="border: 1px dotted black;">
+				
+			</canvas>
+		</div>
+		<div class="col-md-3">
+			<div class="form-group">
+				<label>选择模型图：</label>
+				<input type="file" id="img_ipt">
+			</div>
+			<div class="form-group">
+				<label for="">选择其它锚点文件:</label>
+				<input type="file" id="anchor_ipt">
+				<label>当前锚点数量为：</label><span id="anchor_num"></span>
+			</div>
+			<div class="form-group">
+				<label>选择锚点数：</label>
+				<label class="radio-inline">
+					<input type="radio" name="point_num" id="point_num" value="68"> 68
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="point_num" id="point_num" value="74" checked> 74
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="point_num" id="point_num" value="75"> 75
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="num1">增加/删除线段:</label>
+				<input class="form-control"  type="number" id="num1">
+				<input class="form-control" type="number" id="num2">
+				<button class="btn btn-default" id="add_line">增加线段</button>
+				<button class="btn btn-default" id="delete_line">删除线段</button>
+			</div>
+			<div class="form-group">
+				<input type="text" id="name" class="form-control" placeholder="输出文件名称">
+				<button class="btn btn-default" id="anchor">输出锚点</button>
+				<button class="btn btn-default" id="triangle">输出三角形</button>
+			</div>
+			<div class="form-group">
+				<div class="checkbox"><label for=""><input type="checkbox" id="mirror" checked>使用镜像</input></label></div>
+				<div class="checkbox"><label for=""><input type="checkbox" id="align_middle">对齐中轴线</input></label></div>
+				<div class="form-inline">
+					<label for="unit">移动单位长度（px）：</label>
+					<input type="number" class="form-control" value="2" id="move_unit" style="width: 110px;"> <br>	
+					<label for="unit">缩放百分比：</label>
+					<input type="number" class="form-control" value="2" id="zoom_percent" style="width: 110px;">
+				</div>
+				<button class="btn btn-default center-block" id="move_up">上</button>
+				<div class="row text-center">
+					<button class="btn btn-default" id="move_left">左</button>
+					<button class="btn btn-default btn-xs zoom zoom_in" id="zoom_in">放大</button>
+					<button class="btn btn-default btn-xs zoom zoom_out" id="zoom_out">缩小</button>
+					<button class="btn btn-default" id="move_right">右</button>
+				</div>
+				<button class="btn btn-default center-block" id="move_down">下</button>
+				<div>
+					<button class="btn btn-default align left">以左边为镜像对齐</button>
+					<button class="btn btn-default align right">以右边为镜像对齐</button>
+				</div>
+			</div>
+			<div>
+				<button class="btn btn-default" id="reset">重置</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jcanvas/jcanvas.js"></script>
+<script src="js/index.js"></script>
+</html>
