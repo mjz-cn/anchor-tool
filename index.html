@@ -10,13 +10,15 @@
 			color: red;
 			font-size: 20px;
 		}
+		.num_iput {
+			width: 100px;
+		}
 	</style>
 </head>
 <body class="container">
 	<div class="row">
-		<div class="col-md-9" style="background: url(images/tran.png);">
+		<div class="col-md-9 text-center" style="background: url(images/tran.png);">
 			<canvas id="canvas" style="border: 1px dotted black;">
-				
 			</canvas>
 		</div>
 		<div class="col-md-3">
@@ -27,7 +29,6 @@
 			<div class="form-group">
 				<label for="">选择其它锚点文件:</label>
 				<input type="file" id="anchor_ipt">
-				<label>当前锚点数量为：</label><span id="anchor_num"></span>
 			</div>
 			<div class="form-group">
 				<label>选择锚点数：</label>
@@ -54,29 +55,48 @@
 				<button class="btn btn-default" id="triangle">输出三角形</button>
 			</div>
 			<div class="form-group">
-				<div class="checkbox"><label for=""><input type="checkbox" id="mirror" checked>使用镜像</input></label></div>
+				<div class="radio">
+					<label for=""><input type="radio" name="mirror" value="0" >不使用镜像</input></label>
+					<label for=""><input type="radio" name="mirror" value="1" >水平镜像</input></label>
+					<label for=""><input type="radio" name="mirror" value="2">垂直镜像</input></label>
+					<label for=""><input type="radio" name="mirror" value="3" checked>镜像</input></label>
+				</div>
 				<div class="checkbox"><label for=""><input type="checkbox" id="align_middle">对齐中轴线</input></label></div>
 				<div class="form-inline">
 					<label for="unit">移动单位长度（px）：</label>
 					<input type="number" class="form-control" value="2" id="move_unit" style="width: 110px;"> <br>	
-					<label for="unit">缩放百分比：</label>
-					<input type="number" class="form-control" value="2" id="zoom_percent" style="width: 110px;">
 				</div>
-				<button class="btn btn-default center-block" id="move_up">上</button>
-				<div class="row text-center">
-					<button class="btn btn-default" id="move_left">左</button>
-					<button class="btn btn-default btn-xs zoom zoom_in" id="zoom_in">放大</button>
-					<button class="btn btn-default btn-xs zoom zoom_out" id="zoom_out">缩小</button>
-					<button class="btn btn-default" id="move_right">右</button>
-				</div>
-				<button class="btn btn-default center-block" id="move_down">下</button>
+				<button class="btn btn-default btn-warning" id="move_up">上</button>
+				<button class="btn btn-default btn-warning" id="move_down">下</button>
+				<button class="btn btn-default btn-danger" id="move_left">左</button>
+				<button class="btn btn-default btn-danger" id="move_right">右</button>
 				<div>
 					<button class="btn btn-default align left">以左边为镜像对齐</button>
 					<button class="btn btn-default align right">以右边为镜像对齐</button>
 				</div>
 			</div>
 			<div>
-				<button class="btn btn-default" id="reset">重置</button>
+				<div class="form-group">
+					<label for="unit">锚点拉伸：</label>
+					<div class="input-group">
+						<input type="number" class="form-control" value="100" id="anchor_scale_h_ipt">
+						<div class="input-group-addon">% X</div>
+					</div>
+					<div class="input-group">
+						<input type="number" class="form-control " value="100" id="anchor_scale_v_ipt">
+						<div class="input-group-addon">% Y</div>
+					</div>
+					<button class="btn btn-default" id="anchor_scale_btn">拉伸</button>
+				</div>
+				<div class="form-group">
+					<label for="">整体缩放: </label>
+					<div class="input-group">
+						<input type="number" class="form-control" value="100" id="scale_percent">
+						<div class="input-group-addon">%</div>
+					</div>
+				</div>
+				<!-- <button class="btn btn-default btn-sm show" id="hide_anchor">隐藏锚点</button> -->
+				<button class="btn btn-default btn-sm" id="reset">重置</button>
 			</div>
 		</div>
 	</div>
