@@ -22,86 +22,192 @@
 			</canvas>
 		</div>
 		<div class="col-md-3">
-			<div class="form-group">
-				<label>选择模型图：</label>
-				<input type="file" id="img_ipt">
-			</div>
-			<div class="form-group">
-				<label for="">选择其它锚点文件:</label>
-				<input type="file" id="anchor_ipt">
-			</div>
-			<div class="form-group">
-				<label>选择锚点数：</label>
-				<label class="radio-inline">
-					<input type="radio" name="point_num" id="point_num" value="68"> 68
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="point_num" id="point_num" value="74" checked> 74
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="point_num" id="point_num" value="75"> 75
-				</label>
-			</div>
-			<div class="form-group">
-				<label for="num1">增加/删除线段:</label>
-				<input class="form-control"  type="number" id="num1">
-				<input class="form-control" type="number" id="num2">
-				<button class="btn btn-default" id="add_line">增加线段</button>
-				<button class="btn btn-default" id="delete_line">删除线段</button>
-			</div>
-			<div class="form-group">
-				<input type="text" id="name" class="form-control" placeholder="输出文件名称">
-				<button class="btn btn-default" id="anchor">输出锚点</button>
-				<button class="btn btn-default" id="triangle">输出三角形</button>
-			</div>
-			<div class="form-group">
-				<div class="radio">
-					<label for=""><input type="radio" name="mirror" value="0" >不使用镜像</input></label>
-					<label for=""><input type="radio" name="mirror" value="1" >水平镜像</input></label>
-					<label for=""><input type="radio" name="mirror" value="2">垂直镜像</input></label>
-					<label for=""><input type="radio" name="mirror" value="3" checked>镜像</input></label>
+			<button class="btn btn-default" id="2d_view">隐藏2D操作</button>
+			<div id="2dtip" class="alert alert-info" style="display: none;">2d操作区域</div>
+			<div id="2d" style="display: none;">
+				<div class="form-group">
+					<label>选择模型图：</label>
+					<input type="file" id="img_ipt">
 				</div>
-				<div class="checkbox"><label for=""><input type="checkbox" id="align_middle">对齐中轴线</input></label></div>
-				<div class="form-inline">
-					<label for="unit">移动单位长度（px）：</label>
-					<input type="number" class="form-control" value="2" id="move_unit" style="width: 110px;"> <br>	
+				<div class="form-group">
+					<label for="">选择其它锚点文件:</label>
+					<input type="file" id="anchor_ipt">
 				</div>
-				<button class="btn btn-default btn-warning" id="move_up">上</button>
-				<button class="btn btn-default btn-warning" id="move_down">下</button>
-				<button class="btn btn-default btn-danger" id="move_left">左</button>
-				<button class="btn btn-default btn-danger" id="move_right">右</button>
+				<div class="form-group">
+					<label>选择锚点数：</label>
+					<label class="radio-inline">
+						<input type="radio" name="point_num" id="point_num" value="68"> 68
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="point_num" id="point_num" value="74"> 74
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="point_num" id="point_num" value="75" checked> 75
+					</label>
+				</div>
+				<div class="form-group input-group-sm">
+					<label for="num1">增加/删除线段:</label>
+					<input class="form-control"  type="number" id="num1">
+					<input class="form-control" type="number" id="num2">
+					<button class="btn btn-sm btn-default" id="add_line">增加线段</button>
+					<button class="btn btn-sm btn-default" id="delete_line">删除线段</button>
+				</div>
+				<div class="form-group">
+					<div class="radio">
+						<label for=""><input type="radio" name="mirror" value="0" >不使用镜像</input></label>
+						<label for=""><input type="radio" name="mirror" value="1" >水平镜像</input></label>
+						<label for=""><input type="radio" name="mirror" value="2">垂直镜像</input></label>
+						<label for=""><input type="radio" name="mirror" value="3" checked>镜像</input></label>
+					</div>
+					<div class="checkbox"><label for=""><input type="checkbox" id="align_middle">对齐中轴线</input></label></div>
+					<div class="form-inline">
+						<label for="unit">移动单位长度（px）：</label>
+						<input type="number" class="form-control" value="2" id="move_unit" style="width: 110px;"> <br>	
+					</div>
+					<button class="btn btn-sm btn-default btn-warning" id="move_up">上</button>
+					<button class="btn btn-sm btn-default btn-warning" id="move_down">下</button>
+					<button class="btn btn-sm btn-default btn-danger" id="move_left">左</button>
+					<button class="btn btn-sm btn-default btn-danger" id="move_right">右</button>
+					<div>
+						<button class="btn btn-sm btn-default align left">以左边为镜像对齐</button>
+						<button class="btn btn-sm btn-default align right">以右边为镜像对齐</button>
+					</div>
+				</div>
 				<div>
-					<button class="btn btn-default align left">以左边为镜像对齐</button>
-					<button class="btn btn-default align right">以右边为镜像对齐</button>
+					<div class="form-group">
+						<label for="unit">锚点拉伸：</label>
+						<div class="input-group input-group-sm">
+							<input type="number" class="form-control" value="100" id="anchor_scale_h_ipt">
+							<div class="input-group-addon">% X</div>
+						</div>
+						<div class="input-group input-group-sm">
+							<input type="number" class="form-control " value="100" id="anchor_scale_v_ipt">
+							<div class="input-group-addon">% Y</div>
+						</div>
+						<button class="btn btn-sm btn-default" id="anchor_scale_btn">拉伸</button>
+					</div>
+					<div class="form-group">
+						<label for="">整体缩放: </label>
+						<div class="input-group input-group-sm">
+							<input type="number" class="form-control" value="100" id="scale_percent">
+							<div class="input-group-addon">%</div>
+						</div>
+					</div>
+					<!-- <button class="btn btn-sm btn-default btn-sm show" id="hide_anchor">隐藏锚点</button> -->
+					<!-- <button class="btn btn-sm btn-default btn-sm" id="reset">重置</button> -->
+				</div>
+				<div class="form-group input-group-sm">
+					<input type="text" id="name" class="form-control" placeholder="输出文件名称">
+					<div class="radio">输出格式:
+						<label for=""><input type="radio" name="data_format" value="anchor" checked>锚点</input></label>
+						<label for=""><input type="radio" name="data_format" value="triangle" >三角形</input></label>
+						<label for=""><input type="radio" name="data_format" value="json" >json文件</input></label>
+						<label for=""><input type="radio" name="data_format" value="zip" >zip包</input></label>
+					</div>
+					<button class="btn btn-sm btn-default" id="output">输出</button>
 				</div>
 			</div>
-			<div>
-				<div class="form-group">
-					<label for="unit">锚点拉伸：</label>
-					<div class="input-group">
-						<input type="number" class="form-control" value="100" id="anchor_scale_h_ipt">
-						<div class="input-group-addon">% X</div>
-					</div>
-					<div class="input-group">
-						<input type="number" class="form-control " value="100" id="anchor_scale_v_ipt">
-						<div class="input-group-addon">% Y</div>
-					</div>
-					<button class="btn btn-default" id="anchor_scale_btn">拉伸</button>
+			<div id="filter">
+				<div class="alert alert-info">滤镜操作</div>
+				<div class="checkbox">
+				    <label>
+				      <input type="checkbox" name="enable_filter" id="enable_filter"> 是否使用用滤镜
+				    </label>
 				</div>
 				<div class="form-group">
-					<label for="">整体缩放: </label>
-					<div class="input-group">
-						<input type="number" class="form-control" value="100" id="scale_percent">
-						<div class="input-group-addon">%</div>
-					</div>
+					<label>滤镜类型：</label>
+					<select name="filtertype" id="filtertype" class="form-control">
+						<option value="hue" checked>hue</option>
+					</select>
+					<label>滤镜参数：</label>
+					<button class="btn btn-default btn-sm">增加参数</button>
+					
 				</div>
-				<!-- <button class="btn btn-default btn-sm show" id="hide_anchor">隐藏锚点</button> -->
-				<button class="btn btn-default btn-sm" id="reset">重置</button>
 			</div>
+			<div id="animation" >
+				<div class="alert alert-info">动画操作区域</div>
+				<div class="form-group">
+					<label>选择基准图：</label>
+					<input type="file" id="img_ipt">
+				</div>
+				<div class="form-group">
+					<label>类型</label>
+					<select name="" id="type" class="form-control">
+						<option value="animation_frame">动画</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>子类型</label>
+					<select name="" id="subtype" class="form-control">
+						<option value="relseqframe">relseqframe</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>子类型</label>
+					<select name="" id="seq" class="form-control">
+						<option value="same">same</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>tranlate:  </label>
+					<label class="radio-inline">
+						<input type="radio" name="point_num" id="translate" value="true"> true
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="point_num" id="point_num" value="false"> false
+					</label>
+				</div>
+				<div class="form-horizontal">
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon">帧数</span>
+					  <input type="number" class="form-control" id="frame_num" placeholder="帧数">
+					</div>
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon">帧率</span>
+					  <input type="number" class="form-control" id="frame_dur" placeholder="帧率">
+					</div>
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon">透明度</span>
+					  <input type="text" class="form-control" id="frame_dur" placeholder="透明度">
+					</div>
+				</div>
+				<div class="form-group">
+					<label>触发设置：</label>
+					<div class="form-group">
+						<label>play_all:  </label>
+						<label class="radio-inline">
+							<input type="radio" name="play_all" id="play_all" value="true"> true
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="play_all" id="play_all" value="false"> false
+						</label>
+					</div>
+					<div class="input-group input-group-sm">
+					  <span class="input-group-addon">dis_logic</span>
+					  <input type="number" class="form-control" id="dis_logic" placeholder="dis_logic">
+					</div>
+					<label for="">触发条件：</label>
+				</div>
+			</div>
+
 		</div>
 	</div>
 </body>
+
+<script id="filter_params" type="x-tmpl-mustache">
+	<div class="row">
+		<div class="col-md-6">
+			<input type="text" class="form-control form-control－sm" id="{{key_id}}" placeholder="key">
+		</div>
+		<div class="col-md-6">
+			<input type="text" class="form-control form-control-sm" id="value" placeholder="value">
+		</div>
+	</div>
+</script>
+
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/jcanvas/jcanvas.js"></script>
+<script src="bower_components/jszip/dist/jszip.js"></script>
 <script src="js/index.js"></script>
+
 </html>
